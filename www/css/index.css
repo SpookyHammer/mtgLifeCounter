@@ -1,0 +1,44 @@
+#background-logo{
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    animation: rotating 20s linear infinite;
+}#content{
+     display: block;
+ }
+#login{
+    position: absolute;
+    width:80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(100,100,100,0.4);
+    border: 1px solid black;
+    padding: 5px;
+}
+#login form{
+    width: 100%;
+}
+#login form h3 input{
+    width: 70%;
+    float: right;
+}
+#login form input{
+    width: 100%;
+}
+#member-links{
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+}
+@keyframes rotating {
+    from {
+        transform-origin: center;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform-origin: center;
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
