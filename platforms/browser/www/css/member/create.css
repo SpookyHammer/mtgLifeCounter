@@ -1,0 +1,14 @@
+#content{
+    padding: 10px;
+}
+input[type=submit]{
+    width:100%;
+}
+tr{
+    margin: 0px;
+    padding: 0px;
+}
+td{
+    margin: 0px;
+    padding: 0px;
+}

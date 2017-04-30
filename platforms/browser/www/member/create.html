@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+<body>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous">
+</script>
+<img id="background-logo" src="../img/logo.png" alt="logo"/>
+<link rel="stylesheet" type="text/css" href="../css/logo_turning.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/member/create.css">
+<div id="upper-menu">
+
+</div>
+<div id="content">
+    <form action>
+        <table>
+            <tr>
+                <td><h3>Username</h3></td>
+                <td><input type="text" name="username" required></td>
+            </tr>
+            <tr>
+                <td><h3>Email</h3></td>
+                <td><input type="email" name="mail" required></td>
+            </tr>
+            <tr>
+                <td><h3>Password</h3></td>
+                <td><input type="password" name="pass" required></td>
+            </tr>
+            <tr>
+                <td><h3>Confirm Password</h3></td>
+                <td><input type="password" name="confPass" required></td>
+            </tr>
+            <tr>
+                <td><h3>Name:</h3></td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td><h3>Family Name:</h3></td>
+                <td><input type="text" name="famName"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Login"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    $('input[type=submit]').click(function(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "kaan.swagclan.net/mtgLifeCounter/createMember.php?q=" + str, true);
+        xmlhttp.send();
+    });
+
+    function checkRequired(){
+        $username = $('input[name=username]').text;
+        $email = $('input[name=mail]').text;
+    }
+</script>
+</body>
+</html>

@@ -5,20 +5,80 @@
     <title>New User</title>
 </head>
 <body>
-<img id="background-logo" src="img/logo.png" alt="logo"/>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<img id="background-logo" src="../img/logo.png" alt="logo"/>
+<link rel="stylesheet" type="text/css" href="../css/logo_turning.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/member/create.css">
 <div id="upper-menu">
 
 </div>
 <div id="content">
     <form action>
-        <h3>Username<input type="text" name="username"></h3>
-        <h3>Email<input type="email" name="mail"></h3>
-        <h3>Password<input type="password" name="pass"></h3>
-        <h3>Confirm Password<input type="password" name="confPass"></h3>
-        <input type="submit" value="Login"/>
+        <table>
+            <tr>
+                <td><h3>Username</h3></td>
+                <td><input type="text" name="username" required></td>
+            </tr>
+            <tr>
+                <td><h3>Email</h3></td>
+                <td><input type="email" name="mail" required></td>
+            </tr>
+            <tr>
+                <td><h3>Password</h3></td>
+                <td><input type="password" name="pass" required></td>
+            </tr>
+            <tr>
+                <td><h3>Confirm Password</h3></td>
+                <td><input type="password" name="confPass" required></td>
+            </tr>
+            <tr>
+                <td><h3>Name:</h3></td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td><h3>Family Name:</h3></td>
+                <td><input type="text" name="famName"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="Login"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" id="error"></td>
+            </tr>
+        </table>
     </form>
 </div>
-<div id="lower-menu">
-</div>
+<script>
+    var url = 'http://kaan.swagclan.net/mtgLifeCounter';
+    $('input[type=button]').click(function(){
+
+
+        $username = $('input[name=username]').val();
+        $email = $('input[name=mail]').val();
+        $pass = $('input[name=pass]').val();
+        $name = $('input[name=name]').val();
+        $famName = $('input[name=famName]').val();
+
+        if($name == ""){
+            $name = "NULL";
+        }
+        if($famName == ""){
+            $famName = "NULL";
+        }
+        $.ajax({
+            type: "GET",
+            url: url + "/addUser.php",
+            data: {username: $username, mail: $email, pass: $pass, name: $name, famName: $famName},
+            success: function (result) {
+                $('#error').html("<p>gelukt</p>");
+                console.log(result);
+            },
+            error: function (xhr, status, error) {
+                $('#error').html("<p>-- ERROR IN AJAX --\n\n" + xhr.responseText+"</p>");
+            }
+        });
+    });
+</script>
 </body>
 </html>

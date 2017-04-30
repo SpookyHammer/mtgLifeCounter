@@ -1,12 +1,7 @@
-#background-logo{
-    z-index: -1;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    animation: rotating 20s linear infinite;
-}#content{
+
+#content{
      display: block;
- }
+}
 #login{
     position: absolute;
     width:80%;
@@ -31,14 +26,4 @@
     margin-top: 25px;
     display: flex;
     justify-content: space-around;
-}
-@keyframes rotating {
-    from {
-        transform-origin: center;
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform-origin: center;
-        transform: translate(-50%, -50%) rotate(-360deg);
-    }
 }

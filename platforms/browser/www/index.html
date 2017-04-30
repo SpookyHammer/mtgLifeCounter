@@ -33,15 +33,28 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+        <link rel="stylesheet" type="text/css" href="css/logo_turning.css">
+        <title>MTG Life Counter Lobby</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div id="upper-menu">
+        </div>
+        <img id="background-logo" src="img/logo.png" alt="logo"/>
+        <div id="content">
+            <div id="login">
+                <form action="main.html" method="post">
+                    <h3>Email<input type="email" name="mail"></h3>
+                    <h3>Password<input type="password" name="pass"></h3>
+                    <input type="submit" value="Login"/>
+                </form>
+                <div id="member-links">
+                    <a href="member/create.html">New User</a>
+                    <a href="member/password">Forgot Password</a>
+                </div>
             </div>
+        </div>
+        </div>
+        <div id="lower-menu">
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
