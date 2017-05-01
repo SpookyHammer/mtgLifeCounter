@@ -71,8 +71,8 @@
             url: url + "/addUser.php",
             data: {username: $username, mail: $email, pass: $pass, name: $name, famName: $famName},
             success: function (result) {
-                $('#error').html("<p>gelukt</p>");
-                console.log(result);
+                document.cookie = result;
+                window.location.replace("Main.html");
             },
             error: function (xhr, status, error) {
                 $('#error').html("<p>-- ERROR IN AJAX --\n\n" + xhr.responseText+"</p>");

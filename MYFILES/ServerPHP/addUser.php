@@ -8,6 +8,8 @@
 $username = $_REQUEST["username"];
 $email = $_REQUEST["mail"];
 $pass = $_REQUEST["pass"];
+$pass = hash(sha256,$pass);
+
 if(isset($_REQUEST["name"])){
     $name = $_REQUEST["name"];
 }else{
@@ -32,6 +34,15 @@ if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
+}
+$sql = "SELECT * FROM users WHERE username = $username";
+$result = $conn->query($sql);
+if($result->num_rows > 0){
+    session_start();
+    $row = $result->fetch_assoc();
+    echo $row['id'] . "-*-" . $row['username'] . "-*-" . $row['email'];
+}else{
+    echo "Couldn't log you in automaticly. Please go back and log in manually";
 }
 $conn->close();
 ?>

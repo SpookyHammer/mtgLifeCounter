@@ -28,35 +28,66 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/logo_turning.css">
+        <script src="js/jquery-3.2.1.min.js"></script>
         <title>MTG Life Counter Lobby</title>
     </head>
     <body>
-        <div id="upper-menu">
-        </div>
         <img id="background-logo" src="img/logo.png" alt="logo"/>
         <div id="content">
             <div id="login">
-                <form action="main.html" method="post">
+                <form>
                     <h3>Email<input type="email" name="mail"></h3>
                     <h3>Password<input type="password" name="pass"></h3>
-                    <input type="submit" value="Login"/>
+                    <input type="button" value="Login"/>
                 </form>
                 <div id="member-links">
                     <a href="member/create.html">New User</a>
                     <a href="member/password">Forgot Password</a>
                 </div>
             </div>
+            <div id="lower-menu"></div>
         </div>
-        </div>
-        <div id="lower-menu">
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+        var url = 'http://kaan.swagclan.net/mtgLifeCounter';
+        console.log("geladen");
+        $('input[type=button]').click(function(){
+
+        console.log("geklikt");
+        $email = $('input[name=mail]').val();
+        $pass = $('input[name=pass]').val();
+
+        $filledIn = true;
+
+        if($email == ""){
+            $filledIn = false;
+        }
+        if($pass == ""){
+                $filledIn = false;
+        }
+        if($filledIn){
+            $.ajax({
+                type: "GET",
+                url: url + "/login.php",
+                data: {mail: $email, pass: $pass},
+                success: function (result) {
+                    console.log(result);
+                    if(result.indexOf("error") == -1){
+                        document.cookie = result;
+                        window.location.replace("member/Main.html");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $('#error').html("<p>-- ERROR IN AJAX --\n\n" + xhr.responseText+"</p>");
+                }
+            });
+        }else{
+            $('#lower-menu').html("<h3 style='color: darkred;'>email/password empty</h3>")
+        }
+    });
+
+    </script>
     </body>
 </html>

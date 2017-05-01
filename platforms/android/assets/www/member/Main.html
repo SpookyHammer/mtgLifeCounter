@@ -1,10 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main</title>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/logo_turning.css">
+    <link rel="stylesheet" type="text/css" href="../css/member/main.css">
 </head>
 <body>
+    <div id="content">
+        <div id="upper-menu">
+            <h1 id="username"></h1>
+        </div>
+        <div id="middle-menu">
+            <div id="rooms">
 
+            </div>
+            <div id="controls">
+                <button><a>Create A New Room</a></button>
+            </div>
+        </div>
+        <div id="lower-menu">
+            <img id="lower-logo" src="../img/logo.png" alt="logo"/>
+            <div id="circle"></div>
+            <div id="beam"><div id="beamMiddle"></div></div>
+        </div>
+        <div id="addRoom">
+            <p><input type="checkbox" name="passwordCheckbox">Password</p>
+            <div id="passwordControls">
+            </div>
+            <button>Cancel</button>
+            <button>Create Room</button>
+        </div>
+    </div>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.8.0.min.js"></script>
+<script>
+    var id;
+    var username;
+    var email;
+    setCookiesAppart(document.cookie);
+    $('#username').text(username);
+    getRooms();
+
+    function setCookiesAppart($cookieString){
+        var cookieText = document.cookie;
+        var indexIdStop = cookieText.indexOf("-*-");
+        id = cookieText.substr(0, indexIdStop);
+        cookieText = cookieText.substr(indexIdStop+3);
+        var indexIdStop = cookieText.indexOf("-*-");
+        username = cookieText.substr(0, indexIdStop);
+        email = cookieText.substr(indexIdStop+3);
+    }
+
+    function getRooms(){
+        pubnub = new PubNub({
+            publishKey : 'pub-c-bbccd473-1bed-4c04-8033-e5a1e8b36fd8',
+            subscribeKey : 'sub-c-f4477908-977c-11e6-9eb5-02ee2ddab7fe'
+        })
+        console.log("Subscribing..");
+        pubnub.subscribe({
+            channels: ['rooms']
+        });
+    }
+
+    $('#controls button').click(function(){
+        $opacity = $('#addRoom').css("opacity");
+        if($opacity == "0"){
+            $('#addRoom').css("visibility", "visible");
+            $('#addRoom').css("opacity", "1");
+        }else{
+            $('#addRoom').css("visibility", "hidden");
+            $('#addRoom').css("opacity", "0");
+        }
+    });
+
+    if(document.getElementsByName("passwordCheckbox").checked){
+        $('#passwordControls').html("<input type='text' name='RoomPassword' placeholder='Password'/>")
+    }else{
+        $('#passwordControls').html("");
+    }
+</script>
 </body>
 </html>
